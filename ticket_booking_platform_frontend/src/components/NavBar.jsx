@@ -58,7 +58,7 @@ const Navbar = () => {
 
       {/* Mobile Menu */}
       {isOpen && (
-        <div className="md:hidden bg-white text-center">
+        <div className="md:hidden bg-white text-center font-bold">
           {menuItems.map((item) => (
             <Link
               key={item.name}
