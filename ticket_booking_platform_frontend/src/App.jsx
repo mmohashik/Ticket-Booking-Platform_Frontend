@@ -5,6 +5,7 @@ import Event from './pages/Event'
 import AboutUs from './pages/AboutUs'
 import ContactUs from './pages/ContactUs'
 import Shop from './pages/Shop'
+import AdminDashboard from './pages/AdminDashboard'
 
 const App = () => {
   return (
@@ -15,6 +16,7 @@ const App = () => {
         <Route path="/aboutus" element={<AboutUs />} />
         <Route path="/contactus" element={<ContactUs />} />
         <Route path="/shop" element={<Shop />} />
+        <Route path="/admin" element={<AdminDashboard />} />
       </Routes>
     </BrowserRouter>
   )
