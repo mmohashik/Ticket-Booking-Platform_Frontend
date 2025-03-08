@@ -5,7 +5,7 @@ import Event from './pages/Event'
 import AboutUs from './pages/AboutUs'
 import ContactUs from './pages/ContactUs'
 import Shop from './pages/Shop'
-import AdminDashboard from './pages/AdminDashboard'
+import AdminDashboard from './pages/Admin-Dashboard-Pages/AdminDashboard'
 
 const App = () => {
   return (
