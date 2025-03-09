@@ -6,6 +6,7 @@ import AboutUs from './pages/AboutUs'
 import ContactUs from './pages/ContactUs'
 import Shop from './pages/Shop'
 import AdminDashboard from './pages/Admin-Dashboard-Pages/AdminDashboard'
+import ManageEvents from './pages/Admin-Dashboard-Pages/ManageEvents'
 
 const App = () => {
   return (
@@ -17,6 +18,7 @@ const App = () => {
         <Route path="/contactus" element={<ContactUs />} />
         <Route path="/shop" element={<Shop />} />
         <Route path="/admin" element={<AdminDashboard />} />
+        <Route path="/manage-event" element={<ManageEvents />} />
       </Routes>
     </BrowserRouter>
   )

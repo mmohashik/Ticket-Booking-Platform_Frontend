@@ -13,13 +13,18 @@ const Sidebar = () => {
       path: "/manage-event",
       icon: <Calendar size={20} />,
     },
-    { name: "Seat Maping Tool", path: "/seat-map", icon: <Map size={20} /> },
     {
       name: "Manage Reports",
       path: "/reporting",
       icon: <FileText size={20} />,
     },
-    { name: "Edit Profile", path: "/edit-profile", icon: <Edit size={20} /> },
+    { name: "Seat Maping Tool", 
+      path: "/seat-map", 
+      icon: <Map size={20} /> },
+    
+    { name: "Manage Users", 
+      path: "/edit-profile", 
+      icon: <Edit size={20} /> },
   ];
 
   return (
@@ -34,7 +39,7 @@ const Sidebar = () => {
 
       {/* Sidebar */}
       <div
-        className={`fixed top-0 left-0 h-full bg-white shadow-md transition-transform duration-300 w-64 p-5 ${
+        className={`fixed top-0 left-0 bg-white h-full shadow-lg transition-transform duration-300 w-64 p-5 ${
           isOpen ? "translate-x-0" : "-translate-x-full"
         } md:relative md:translate-x-0 md:w-80`}
       >
