@@ -23,7 +23,7 @@ const Sidebar = () => {
       icon: <Map size={20} /> },
     
     { name: "Manage Users", 
-      path: "/edit-profile", 
+      path: "/manage-users", 
       icon: <Edit size={20} /> },
   ];
 

@@ -9,7 +9,7 @@ const ManageReports = () => {
       <div className="flex-1">
         <D_Navbar />
         <div className="p-5">
-          <h1 className="text-2xl font-semibold mb-4">Manage Reports</h1>
+          <h1 className="text-2xl font-semibold mb-4">Manage Users</h1>
         </div>
     </div>
     </div>
