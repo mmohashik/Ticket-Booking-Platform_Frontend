@@ -1,8 +1,7 @@
 import React from "react";
 import Sidebar from "../../components/dashboard_Components/Sidebar";
 import D_Navbar from "../../components/dashboard_Components/D_Navbar";
-import EventCard from "../../components/dashboard_Components/EventCardEdit";
-import AddEventCard from "../../components/dashboard_Components/AddEventCard";
+import AddEventForm from "../../components/dashboard_Components/AddEventForm";
 
 const ManageEvents = () => {
   return (
@@ -14,8 +13,8 @@ const ManageEvents = () => {
           <h1 className="text-2xl font-semibold mb-4">Manage Events</h1>
         </div>
         <div className="p-5">
-          {/* <EventCard /> */}
-          <AddEventCard />
+          {/* display table */}
+          <AddEventForm />
         </div>
       </div>
     </div>
