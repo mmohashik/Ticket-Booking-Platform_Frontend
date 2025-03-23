@@ -1,94 +1,106 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import axios from "axios";
 
 const AddEventForm = () => {
-  const [eventData, setEventData] = useState({
+  const [formData, setFormData] = useState({
     eventName: "",
     eventDate: "",
     eventTime: "",
     venue: "",
-    auditorium: "",
-    ticketTypes: "",
+    ticketTypes: [{ type: "", price: 0 }],
     image: null,
   });
 
-  const [auditoriums, setAuditoriums] = useState([]);
-  const ticketTypes = ["VIP", "Regular", "Student"];
-
-  useEffect(() => {
-    // Fetch auditoriums from API (Mocking API response)
-    setAuditoriums(["Main Hall", "Conference Room", "Outdoor Arena"]);
-  }, []);
-
   const handleChange = (e) => {
     const { name, value } = e.target;
-    setEventData({ ...eventData, [name]: value });
+    setFormData({ ...formData, [name]: value });
   };
 
-  const handleFileChange = (e) => {
-    setEventData({ ...eventData, image: e.target.files[0] });
+  const handleTicketTypeChange = (index, e) => {
+    const { name, value } = e.target;
+    const updatedTicketTypes = [...formData.ticketTypes]; // Create a copy of the ticketTypes array
+    updatedTicketTypes[index][name] = value; // Update the specific ticket type
+    setFormData({ ...formData, ticketTypes: updatedTicketTypes }); // Update the state
+  };
+
+  const handleImageChange = (e) => {
+    setFormData({ ...formData, image: e.target.files[0] });
   };
 
   const handleSubmit = async (e) => {
-    e.preventDefault();
+  e.preventDefault();
 
-    const formData = new FormData();
-    Object.keys(eventData).forEach((key) => {
-      formData.append(key, eventData[key]);
+  const data = new FormData();
+  data.append("eventName", formData.eventName);
+  data.append("eventDate", formData.eventDate);
+  data.append("eventTime", formData.eventTime);
+  data.append("venue", formData.venue);
+  data.append("ticketTypes", JSON.stringify(formData.ticketTypes)); // Stringify the array
+  data.append("image", formData.image);
+
+  try {
+    const response = await axios.post("http://localhost:3000/event", data, {
+      headers: { "Content-Type": "multipart/form-data" },
     });
-
-    try {
-      const response = await axios.post("http://localhost:3000/event", formData, {
-        headers: { "Content-Type": "multipart/form-data" },
-      });
-
-      console.log("Event added successfully:", response.data);
-      alert("Event added successfully!");
-
-      setEventData({
-        eventName: "",
-        eventDate: "",
-        eventTime: "",
-        venue: "",
-        auditorium: "",
-        ticketTypes: "",
-        image: null,
-      });
-    } catch (error) {
-      console.error("Error adding event:", error.response?.data || error);
-      alert("Failed to add event.");
-    }
-  };
+    console.log("Event created:", response.data);
+  } catch (error) {
+    console.error("Error creating event:", error);
+  }
+};
 
   return (
-    <div className="max-w-2xl mx-auto bg-white p-8 shadow-lg rounded-lg">
-      <h2 className="text-2xl font-bold mb-6 text-center">Add Event</h2>
-      <form onSubmit={handleSubmit} className="space-y-4" encType="multipart/form-data">
-        <input type="text" name="eventName" value={eventData.eventName} onChange={handleChange} placeholder="Event Name" className="w-full p-3 border rounded-lg focus:ring-2 focus:ring-blue-500" required />
-        <input type="date" name="eventDate" value={eventData.eventDate} onChange={handleChange} className="w-full p-3 border rounded-lg focus:ring-2 focus:ring-blue-500" required />
-        <input type="time" name="eventTime" value={eventData.eventTime} onChange={handleChange} className="w-full p-3 border rounded-lg focus:ring-2 focus:ring-blue-500" required />
-        <input type="text" name="venue" value={eventData.venue} onChange={handleChange} placeholder="Venue" className="w-full p-3 border rounded-lg focus:ring-2 focus:ring-blue-500" required />
-
-        <select name="auditorium" value={eventData.auditorium} onChange={handleChange} className="w-full p-3 border rounded-lg focus:ring-2 focus:ring-blue-500" required>
-          <option value="">Select Auditorium</option>
-          {auditoriums.map((auditorium, index) => (
-            <option key={index} value={auditorium}>{auditorium}</option>
-          ))}
-        </select>
-
-        <select name="ticketTypes" value={eventData.ticketTypes} onChange={handleChange} className="w-full p-3 border rounded-lg focus:ring-2 focus:ring-blue-500" required>
-          <option value="">Select Ticket Type</option>
-          {ticketTypes.map((type, index) => (
-            <option key={index} value={type}>{type}</option>
-          ))}
-        </select>
-
-        <input type="file" name="image" onChange={handleFileChange} className="w-full p-3 border rounded-lg focus:ring-2 focus:ring-blue-500" required />
-
-        <button type="submit" className="w-full p-3 bg-blue-500 text-white font-bold rounded-lg hover:bg-blue-600">Add Event</button>
-      </form>
+    <div>
+      <form onSubmit={handleSubmit}>
+      <input
+        type="text"
+        name="eventName"
+        placeholder="Event Name"
+        value={formData.eventName}
+        onChange={handleChange}
+      />
+      <input
+        type="date"
+        name="eventDate"
+        value={formData.eventDate}
+        onChange={handleChange}
+      />
+      <input
+        type="time"
+        name="eventTime"
+        value={formData.eventTime}
+        onChange={handleChange}
+      />
+      <input
+        type="text"
+        name="venue"
+        placeholder="Venue"
+        value={formData.venue}
+        onChange={handleChange}
+      />
+      {formData.ticketTypes.map((ticket, index) => (
+        <div key={index}>
+          <input
+            type="text"
+            name="type"
+            placeholder="Ticket Type"
+            value={ticket.type}
+            onChange={(e) => handleTicketTypeChange(index, e)}
+          />
+          <input
+            type="number"
+            name="price"
+            placeholder="Price"
+            value={ticket.price}
+            onChange={(e) => handleTicketTypeChange(index, e)}
+          />
+        </div>
+      ))}
+      <input type="file" name="image" onChange={handleImageChange} />
+      <button type="submit">Create Event</button>
+    </form>
     </div>
   );
+  
 };
 
 export default AddEventForm;
