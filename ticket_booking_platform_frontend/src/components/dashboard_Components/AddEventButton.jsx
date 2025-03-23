@@ -18,7 +18,7 @@ const AddEventButton = () => {
           {/* Button to open the modal */}
           <button
             onClick={openModal}
-            className="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600"
+            className="bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-700"
           >
             Add Event
           </button>
