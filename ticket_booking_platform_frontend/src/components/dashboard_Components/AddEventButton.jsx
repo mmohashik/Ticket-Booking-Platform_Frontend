@@ -1,4 +1,4 @@
-import React, {useState} from "react";
+import React, { useState } from "react";
 import AddEventForm from "./AddEventForm";
 
 const AddEventButton = () => {
@@ -12,43 +12,42 @@ const AddEventButton = () => {
     setIsModalOpen(false);
   };
   return (
-    <div>
-      
-        <div className="p-4">
-          {/* Button to open the modal */}
-          <button
-            onClick={openModal}
-            className="bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-700"
+    <div className="p-4">
+      {/* Button to open the modal */}
+      <button
+        onClick={openModal}
+        className="bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-700"
+      >
+        Add Event
+      </button>
+
+      {/* Modal */}
+      {isModalOpen && (
+        <div
+          className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50 z-50"
+          onClick={closeModal}
+          style={{ backgroundColor: 'rgba(0, 0, 0, 0.6)' }}
+        >
+          <div
+            className="bg-white rounded-lg shadow-lg w-full max-w-4xl mx-4 relative"
+            onClick={(e) => e.stopPropagation()}
           >
-            Add Event
-          </button>
-
-          {/* Modal */}
-          {isModalOpen && (
-            <div
-              className="fixed inset-0 flex items-center justify-center bg-gray-800 bg-opacity-5" // Semi-transparent background
-              onClick={closeModal} // Close modal when clicking the background
+            {/* Close button */}
+            <button
+              onClick={closeModal}
+              className="absolute top-4 right-4 text-gray-500 hover:text-gray-700 text-2xl"
             >
-              <div
-                className="bg-white p-6 rounded-lg shadow-lg w-full max-w-md relative"
-                onClick={(e) => e.stopPropagation()} // Prevent clicks inside the modal from closing it
-              >
-                {/* Close button */}
-                <button
-                  onClick={closeModal}
-                  className="absolute top-2 right-2 text-gray-500 hover:text-gray-700"
-                >
-                  &times;
-                </button>
+              &times;
+            </button>
 
-                {/* Event Form */}
-                <AddEventForm onClose={closeModal} />
-              </div>
+            {/* Event Form - Now with wider modal to accommodate two columns */}
+            <div className="p-6 max-h-[90vh] overflow-y-auto">
+              <AddEventForm onClose={closeModal} />
             </div>
-          )}
+          </div>
         </div>
-      </div>
-    
+      )}
+    </div>
   );
 };
 
