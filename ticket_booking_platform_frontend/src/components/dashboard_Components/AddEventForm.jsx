@@ -105,7 +105,7 @@ const AddEventForm = ({ onClose }) => {
     data.append("status", formData.status);
 
     try {
-      const response = await axios.post("http://localhost:3000/event", data, {
+      const response = await axios.post("http://localhost:3000/api/events", data, {
         headers: { "Content-Type": "multipart/form-data" },
       });
       
