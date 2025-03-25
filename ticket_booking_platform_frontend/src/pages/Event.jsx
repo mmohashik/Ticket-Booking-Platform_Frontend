@@ -8,6 +8,9 @@ const Event = () => {
       <div className='p-10'>
         cards here
       </div>
+      <MiddleTextEvents/>
+
+      <Footer/>
     </div>
   )
 }
