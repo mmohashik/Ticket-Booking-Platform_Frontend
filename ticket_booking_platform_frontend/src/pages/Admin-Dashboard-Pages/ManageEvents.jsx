@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import Sidebar from "../../components/dashboard_Components/Sidebar";
 import D_Navbar from "../../components/dashboard_Components/D_Navbar";
 import AddEventButton from "../../components/dashboard_Components/AddEventButton";
-import EventList from "../../components/dashboard_Components/EventDetailsTable";
+import EventList from "../../components/dashboard_Components/EventList";
 
 const ManageEvents = () => {
   return (
